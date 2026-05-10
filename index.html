@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martins Coin Miner | Official</title>
+    
+    <!-- GOOGLE ADSENSE VERIFICATION -->
+    <meta name="google-adsense-account" content="ca-pub-3339316714348223">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3339316714348223" crossorigin="anonymous"></script>
+
+    <style>
+        :root { --gold: #FFD700; --black: #050505; --surface: #1a1a1a; }
+        body { background: var(--black); color: white; font-family: sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        header { width: 100%; padding: 20px 0; text-align: center; border-bottom: 2px solid var(--gold); background: #000; }
+        .bird-icon { width: 80px; height: 80px; fill: var(--gold); margin-top: 30px; filter: drop-shadow(0 0 10px var(--gold)); animation: float 3s infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .balance-card { background: var(--surface); border: 1px solid var(--gold); padding: 25px; border-radius: 20px; text-align: center; width: 85%; max-width: 350px; margin: 20px 0; }
+        #balance { font-size: 32px; font-weight: bold; color: var(--gold); }
+        .mine-btn { background: var(--gold); color: black; border: none; padding: 18px; font-size: 18px; font-weight: bold; border-radius: 50px; cursor: pointer; width: 85%; max-width: 350px; }
+        .mine-btn:disabled { background: #444; color: #888; }
+        .ad-slot { width: 100%; max-width: 320px; min-height: 50px; background: #111; margin-top: auto; padding: 10px 0; text-align: center; border-top: 1px solid #333; }
+        .info-text { padding: 20px; font-size: 14px; color: #888; line-height: 1.6; max-width: 400px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<header><h1 style="color:var(--gold); letter-spacing:2px; font-size:18px;">MARTINS COIN CORE</h1></header>
+
+<svg class="bird-icon" viewBox="0 0 24 24"><path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"/></svg>
+
+<div class="balance-card">
+    <p style="margin:0; font-size:10px; color:#888;">MARTINS COIN BALANCE</p>
+    <span id="balance">0.000000</span>
+</div>
+
+<button id="mineBtn" class="mine-btn" onclick="startMining()">START MINING</button>
+<p id="status" style="margin-top:10px; font-size:12px; color:var(--gold);">Ready</p>
+
+<!-- ADSENSE AD SLOT -->
+<div class="ad-slot">
+    <ins class="adsbygoogle" style="display:inline-block;width:320px;height:50px" 
+         data-ad-client="ca-pub-3339316714348223" data-ad-slot="YOUR_SLOT_ID"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<div class="info-text">
+    <strong>About Martins Coin (MTC):</strong> This simulation uses advanced algorithms to reward users for their time. MTC is the backbone of the Ayomide Gold Empire. Mining requires a 20-second cooling period to ensure network stability and difficulty. Stay on this page to maximize your earning potential.
+</div>
+
+<script>
+    let balance = parseFloat(localStorage.getItem('mtc_bal')) || 0;
+    const disp = document.getElementById('balance');
+    const btn = document.getElementById('mineBtn');
+    disp.innerText = balance.toFixed(6);
+
+    function startMining() {
+        btn.disabled = true;
+        let time = 20;
+        document.getElementById('status').innerText = "Mining Engine Active...";
+        
+        const timer = setInterval(() => {
+            time--;
+            btn.innerText = `COOLDOWN (${time}s)`;
+            if (time <= 0) {
+                clearInterval(timer);
+                let reward = (Math.random() * 0.002).toFixed(6);
+                balance += parseFloat(reward);
+                localStorage.setItem('mtc_bal', balance);
+                disp.innerText = balance.toFixed(6);
+                btn.disabled = false;
+                btn.innerText = "START MINING";
+                document.getElementById('status').innerText = "Mined +" + reward + " MTC!";
+            }
+        }, 1000);
+    }
+</script>
+</body>
+</html>
